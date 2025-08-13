@@ -1,26 +1,169 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* 古风主题全局样式 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --primary: #2D1B69;
+  --gold: #FFD700;
+  --ancient-blue: #1A237E;
+  --scroll-bg: #f5f2e8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #faf9f6;
+    --foreground: #2c2c2c;
   }
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
 body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'SimSun', 'FangSong', serif;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(45, 27, 105, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(26, 35, 126, 0.08) 0%, transparent 50%);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+/* 古风滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(45, 27, 105, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FFD700, #cc9900);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FFA000, #b38600);
+}
+
+/* 古风按钮基础样式 */
+.btn-ancient {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  @apply bg-gradient-to-r from-primary-900 to-ancient-blue;
+  @apply text-gold-500 border border-gold-500/30;
+  @apply hover:shadow-gold hover:border-gold-500;
+  @apply active:scale-95;
+}
+
+.btn-gold {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  @apply bg-gradient-gold text-primary-900;
+  @apply hover:shadow-ancient hover:scale-105;
+  @apply active:scale-95;
+}
+
+/* 古风卡片样式 */
+.card-ancient {
+  @apply bg-gradient-scroll border border-gold-500/20;
+  @apply rounded-xl shadow-scroll backdrop-blur-sm;
+  @apply hover:shadow-gold transition-all duration-300;
+}
+
+/* 古风输入框样式 */
+.input-ancient {
+  @apply w-full px-4 py-3 rounded-lg;
+  @apply bg-ancient-paper/80 border border-gold-500/30;
+  @apply text-ancient-ink placeholder-ancient-ink/60;
+  @apply focus:outline-none focus:border-gold-500 focus:shadow-gold;
+  @apply transition-all duration-300;
+}
+
+/* 古风标题样式 */
+.title-ancient {
+  @apply font-title text-transparent bg-clip-text;
+  @apply bg-gradient-to-r from-gold-500 to-gold-600;
+  @apply drop-shadow-lg;
+}
+
+/* 古风文本样式 */
+.text-ancient {
+  @apply text-ancient-ink/80 leading-relaxed;
+  @apply font-chinese;
+}
+
+/* 八卦图案背景 */
+.bagua-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFD700' fill-opacity='0.05'%3E%3Cpath d='M30 30c0-16.569 13.431-30 30-30v30H30z'/%3E%3Cpath d='M30 30c16.569 0 30-13.431 30-30H30v30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 动画效果 */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.2),
+    transparent
+  );
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .btn-ancient,
+  .btn-gold {
+    @apply px-4 py-2 text-sm;
+  }
+  
+  .card-ancient {
+    @apply mx-4;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .card-ancient {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
 }

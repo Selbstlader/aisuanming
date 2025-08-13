@@ -1,103 +1,217 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { Calendar, Star, History, User } from 'lucide-react';
+import Layout from '@/components/layout/Layout';
+
+const HomePage = () => {
+  const features = [
+    {
+      icon: Calendar,
+      title: '八字排盘',
+      description: '基于真太阳时的精准八字计算，传承千年命理智慧',
+      href: '/bazi',
+      color: 'from-gold-500 to-gold-600',
+    },
+    {
+      icon: Star,
+      title: '命理分析',
+      description: 'AI智能分析结合传统理论，深度解读人生运势',
+      href: '/analysis',
+      color: 'from-primary-500 to-primary-600',
+    },
+    {
+      icon: History,
+      title: '历史记录',
+      description: '保存您的算命记录，随时查看命理变化轨迹',
+      href: '/history',
+      color: 'from-ancient-blue to-primary-700',
+    },
+    {
+      icon: User,
+      title: '个人中心',
+      description: '管理个人信息，定制专属的命理服务体验',
+      href: '/profile',
+      color: 'from-gold-600 to-ancient-bronze',
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <Layout>
+      <div className="container mx-auto px-4 py-12">
+        {/* 英雄区域 */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <motion.h1
+            className="title-ancient text-5xl md:text-7xl font-bold mb-6"
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            天机算命
+          </motion.h1>
+          
+          <motion.p
+            className="text-gold-500/80 text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            传承千年易学智慧，融合现代AI技术
+            <br />
+            为您揭示命运奥秘，指引人生方向
+          </motion.p>
+          
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <Link href="/bazi" className="btn-gold text-lg px-8 py-4">
+              开始算命
+            </Link>
+            <Link href="/about" className="btn-ancient text-lg px-8 py-4">
+              了解更多
+            </Link>
+          </motion.div>
+        </motion.section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* 功能特色 */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-16"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="title-ancient text-3xl md:text-4xl font-bold text-center mb-12"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+            核心功能
+          </motion.h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature) => {
+              const Icon = feature.icon;
+              return (
+                <motion.div
+                  key={feature.title}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="card-ancient p-6 text-center group cursor-pointer"
+                >
+                  <Link href={feature.href} className="block">
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${feature.color} flex items-center justify-center group-hover:animate-glow transition-all duration-300`}>
+                      <Icon className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold text-ancient-ink mb-3 group-hover:text-primary-700 transition-colors">
+                      {feature.title}
+                    </h3>
+                    
+                    <p className="text-ancient-ink/70 text-sm leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.section>
+
+        {/* 特色介绍 */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="card-ancient p-8 md:p-12 text-center"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <h2 className="title-ancient text-3xl md:text-4xl font-bold mb-8">
+            为什么选择天机算命？
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-center"
+            >
+              <div className="w-12 h-12 mx-auto mb-4 bg-gradient-gold rounded-full flex items-center justify-center">
+                <span className="text-primary-900 font-bold text-xl">精</span>
+              </div>
+              <h3 className="text-xl font-semibold text-ancient-ink mb-2">精准计算</h3>
+              <p className="text-ancient-ink/70 text-sm">
+                基于真太阳时的精确计算，确保八字排盘的准确性
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-center"
+            >
+              <div className="w-12 h-12 mx-auto mb-4 bg-gradient-gold rounded-full flex items-center justify-center">
+                <span className="text-primary-900 font-bold text-xl">智</span>
+              </div>
+              <h3 className="text-xl font-semibold text-ancient-ink mb-2">AI智能</h3>
+              <p className="text-ancient-ink/70 text-sm">
+                结合人工智能技术，提供深度的命理分析和解读
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center"
+            >
+              <div className="w-12 h-12 mx-auto mb-4 bg-gradient-gold rounded-full flex items-center justify-center">
+                <span className="text-primary-900 font-bold text-xl">承</span>
+              </div>
+              <h3 className="text-xl font-semibold text-ancient-ink mb-2">传统传承</h3>
+              <p className="text-ancient-ink/70 text-sm">
+                严格遵循传统命理理论，传承千年易学文化精髓
+              </p>
+            </motion.div>
+          </div>
+        </motion.section>
+      </div>
+    </Layout>
   );
-}
+};
+
+export default HomePage;
