@@ -2,20 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 古风主题全局样式 */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #ffffff;
+  --foreground: #171717;
   --primary: #2D1B69;
+  --primary-foreground: #ffffff;
   --gold: #FFD700;
   --ancient-blue: #1A237E;
-  --scroll-bg: #f5f2e8;
+  --ancient-bronze: #8D6E63;
+  --ancient-ink: #2c2c2c;
+  --ancient-paper: #faf9f6;
+  --ancient-scroll: #f5f2e8;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: #faf9f6;
-    --foreground: #2c2c2c;
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
 }
 
@@ -29,27 +32,54 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'SimSun', 'FangSong', serif;
-  background: var(--background);
-  color: var(--foreground);
 }
 
 body {
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(45, 27, 105, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(26, 35, 126, 0.08) 0%, transparent 50%);
-  min-height: 100vh;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
-a:hover {
-  color: var(--gold);
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* 确保Tailwind样式正确应用 */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-800 transition-colors;
+  }
+  
+  .btn-gold {
+    @apply bg-gold-500 text-primary-900 px-6 py-3 rounded-lg font-medium hover:bg-gold-400 transition-colors;
+  }
+  
+  .card-ancient {
+    @apply bg-white rounded-xl shadow-ancient border border-gray-100;
+  }
+  
+  .gradient-ancient {
+    @apply bg-gradient-to-br from-primary-900 to-ancient-blue;
+  }
+  
+  .gradient-gold {
+    @apply bg-gradient-to-r from-gold-500 to-gold-400;
+  }
 }
 
 /* 古风滚动条样式 */
