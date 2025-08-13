@@ -75,7 +75,7 @@ a:hover {
 /* 古风按钮基础样式 */
 .btn-ancient {
   @apply px-6 py-3 rounded-lg font-medium transition-all duration-300;
-  @apply bg-gradient-to-r from-primary-900 to-ancient-blue;
+  @apply bg-gradient-to-r from-primary-900 to-[#1A237E];
   @apply text-gold-500 border border-gold-500/30;
   @apply hover:shadow-gold hover:border-gold-500;
   @apply active:scale-95;
@@ -83,14 +83,14 @@ a:hover {
 
 .btn-gold {
   @apply px-6 py-3 rounded-lg font-medium transition-all duration-300;
-  @apply bg-gradient-gold text-primary-900;
+  @apply bg-gradient-to-r from-gold-500 to-gold-600 text-primary-900;
   @apply hover:shadow-ancient hover:scale-105;
   @apply active:scale-95;
 }
 
 /* 古风卡片样式 */
 .card-ancient {
-  @apply bg-gradient-scroll border border-gold-500/20;
+  @apply bg-gradient-to-b from-[#f5f2e8] to-[#ede8d3] border border-gold-500/20;
   @apply rounded-xl shadow-scroll backdrop-blur-sm;
   @apply hover:shadow-gold transition-all duration-300;
 }
@@ -98,8 +98,8 @@ a:hover {
 /* 古风输入框样式 */
 .input-ancient {
   @apply w-full px-4 py-3 rounded-lg;
-  @apply bg-ancient-paper/80 border border-gold-500/30;
-  @apply text-ancient-ink placeholder-ancient-ink/60;
+  @apply bg-[#faf9f6]/80 border border-gold-500/30;
+  @apply text-[#2c2c2c] placeholder-[#2c2c2c]/60;
   @apply focus:outline-none focus:border-gold-500 focus:shadow-gold;
   @apply transition-all duration-300;
 }
@@ -113,7 +113,7 @@ a:hover {
 
 /* 古风文本样式 */
 .text-ancient {
-  @apply text-ancient-ink/80 leading-relaxed;
+  @apply text-[#2c2c2c]/80 leading-relaxed;
   @apply font-chinese;
 }
 
