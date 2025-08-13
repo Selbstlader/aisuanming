@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Layout from '@/components/layout/Layout';
+import CitySelector from '@/components/CitySelector';
 import { BirthInfo, BaziResult } from '@/types';
+import { CitySelection } from '@/components/CitySelector';
 // import { formatChineseDateTime } from '@/lib/utils'; // 暂时未使用
 import { useAuth } from '@/hooks/useAuth';
 import { database } from '@/lib/supabase';
@@ -46,8 +48,33 @@ const BaziPage = () => {
       ...prev,
       location: {
         ...prev.location,
-        [field]: value,
-      },
+        [field]: value
+      }
+    }));
+  };
+
+  const handleCitySelect = (citySelection: CitySelection) => {
+    // 构建完整的地点名称
+    let fullName = '';
+    if (citySelection.province) {
+      fullName += citySelection.province.label;
+    }
+    if (citySelection.city) {
+      fullName += ' ' + citySelection.city.label;
+    }
+    if (citySelection.district) {
+      fullName += ' ' + citySelection.district.label;
+    }
+    fullName = fullName.trim();
+
+    setBirthInfo(prev => ({
+      ...prev,
+      location: {
+        name: fullName,
+        longitude: citySelection.coordinates?.longitude || 116.4074,
+        latitude: citySelection.coordinates?.latitude || 39.9042,
+        timezone: typeof citySelection.coordinates?.timezone === 'number' ? citySelection.coordinates.timezone : 8
+      }
     }));
   };
 
@@ -392,12 +419,9 @@ const BaziPage = () => {
                     <MapPin className="w-4 h-4 inline mr-1" />
                     出生地点
                   </label>
-                  <input
-                    type="text"
-                    value={birthInfo.location.name}
-                    onChange={(e) => handleLocationChange('name', e.target.value)}
-                    className="input-ancient"
-                    placeholder="如：北京市"
+                  <CitySelector
+                    onCitySelect={handleCitySelect}
+                    selectedCity={birthInfo.location.name}
                   />
                 </div>
 
@@ -413,6 +437,7 @@ const BaziPage = () => {
                       onChange={(e) => handleLocationChange('longitude', parseFloat(e.target.value))}
                       className="input-ancient"
                       placeholder="116.4074"
+                      readOnly
                     />
                   </div>
                   <div>
@@ -426,13 +451,14 @@ const BaziPage = () => {
                       onChange={(e) => handleLocationChange('latitude', parseFloat(e.target.value))}
                       className="input-ancient"
                       placeholder="39.9042"
+                      readOnly
                     />
                   </div>
                 </div>
 
                 <div className="text-xs text-ancient-ink/60">
                   <p>* 经纬度用于计算真太阳时，确保八字准确性</p>
-                  <p>* 如不确定可使用默认值（北京坐标）</p>
+                  <p>* 选择城市后将自动填充对应的经纬度坐标</p>
                 </div>
               </div>
             </div>

@@ -15,24 +15,28 @@ const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
   const { register, error } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // 清除之前的验证错误
+    setValidationError(null);
+    
     if (!email || !password || !confirmPassword) {
-      alert('请填写完整的注册信息');
+      setValidationError('请填写完整的注册信息');
       return;
     }
 
     if (password !== confirmPassword) {
-      alert('两次输入的密码不一致');
+      setValidationError('两次输入的密码不一致');
       return;
     }
 
     if (password.length < 6) {
-      alert('密码长度至少为6位');
+      setValidationError('密码长度至少为6位');
       return;
     }
 
@@ -41,14 +45,11 @@ const RegisterPage = () => {
     try {
       const result = await register(email, password);
       if (result.user) {
-        alert('注册成功！欢迎使用算命网站。');
         router.push('/'); // 注册成功后直接跳转到主页
-      } else if (result.error) {
-        alert(result.error);
       }
+      // 错误信息已经通过useAuth hook的error状态处理
     } catch (error) {
       console.error('注册失败:', error);
-      alert('注册失败，请重试');
     } finally {
       setIsLoading(false);
     }
@@ -149,9 +150,9 @@ const RegisterPage = () => {
               </div>
 
               {/* 错误信息 */}
-              {error && (
-                <div className="text-red-500 text-sm text-center bg-red-50 p-3 rounded-lg">
-                  {error}
+              {(error || validationError) && (
+                <div className="text-red-500 text-sm text-center bg-red-50 p-3 rounded-lg border border-red-200">
+                  {validationError || error}
                 </div>
               )}
 

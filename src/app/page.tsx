@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Calendar, Star, History, User } from 'lucide-react';
+import { Calendar, Star, History, User, Clock, Calculator } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 
 const HomePage = () => {
@@ -20,6 +20,20 @@ const HomePage = () => {
       description: 'AI智能分析结合传统理论，深度解读人生运势',
       href: '/analysis',
       color: 'from-primary-500 to-primary-600',
+    },
+    {
+      icon: Clock,
+      title: '多久退休',
+      description: '精确计算距离退休的时间，合理规划人生后半程',
+      href: '/retirement-countdown',
+      color: 'from-blue-500 to-blue-600',
+    },
+    {
+      icon: Calculator,
+      title: '退休金计算',
+      description: '智能预测退休金数额，提前做好财务规划',
+      href: '/pension-calculator',
+      color: 'from-green-500 to-green-600',
     },
     {
       icon: History,
@@ -118,7 +132,7 @@ const HomePage = () => {
             核心功能
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
