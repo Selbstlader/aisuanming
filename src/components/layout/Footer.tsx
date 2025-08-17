@@ -23,14 +23,14 @@ const Footer = () => {
         { href: '/auth/register', label: '注册' },
       ],
     },
-    {
-      title: '关于我们',
-      links: [
-        { href: '/about', label: '关于网站' },
-        { href: '/privacy', label: '隐私政策' },
-        { href: '/terms', label: '使用条款' },
-      ],
-    },
+    // {
+    //   title: '关于我们',
+    //   links: [
+    //     { href: '/about', label: '关于网站' },
+    //     { href: '/privacy', label: '隐私政策' },
+    //     { href: '/terms', label: '使用条款' },
+    //   ],
+    // },
   ];
 
   return (
@@ -105,11 +105,11 @@ const Footer = () => {
             <p>© {currentYear} 天机算命. 保留所有权利.</p>
           </div>
           
-          <div className="flex items-center space-x-6 text-xs text-gold-500/60">
+          {/* <div className="flex items-center space-x-6 text-xs text-gold-500/60">
             <span>技术支持: Next.js + Supabase</span>
             <span>•</span>
             <span>AI 驱动: DeepSeek</span>
-          </div>
+          </div> */}
         </motion.div>
 
         {/* 装饰性元素 */}

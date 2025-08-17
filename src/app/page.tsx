@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Calendar, Star, History, User, Clock, Calculator } from 'lucide-react';
+import { Calendar, Star, History, User, Clock, Calculator, Type } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 
 const HomePage = () => {
@@ -13,6 +13,13 @@ const HomePage = () => {
       description: '基于真太阳时的精准八字计算，传承千年命理智慧',
       href: '/bazi',
       color: 'from-gold-500 to-gold-600',
+    },
+    {
+      icon: Type,
+      title: 'AI取名',
+      description: 'AI智能取名，结合五行八字，为您推荐吉祥好名',
+      href: '/naming',
+      color: 'from-purple-500 to-purple-600',
     },
     {
       icon: Star,
@@ -111,9 +118,9 @@ const HomePage = () => {
             <Link href="/bazi" className="btn-gold text-lg px-8 py-4">
               开始算命
             </Link>
-            <Link href="/about" className="btn-ancient text-lg px-8 py-4">
+            {/* <Link href="/about" className="btn-ancient text-lg px-8 py-4">
               了解更多
-            </Link>
+            </Link> */}
           </motion.div>
         </motion.section>
 
