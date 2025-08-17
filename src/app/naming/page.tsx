@@ -307,7 +307,7 @@ export default function NamingHomePage() {
                         </CardHeader>
                         <CardContent>
                           <div className="space-y-2">
-                            {record.generated_names.slice(0, 3).map((name, index) => {
+                            {record.generated_names.slice(0, 3).map((name: string | { name: string }, index) => {
                               // 确保name是字符串，如果是对象则提取name字段
                               const displayName = typeof name === 'string' ? name : (name?.name || '未知名称');
                               return (
